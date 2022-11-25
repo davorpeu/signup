@@ -1,43 +1,84 @@
 <template>
   <div>
     <h1>Sign up</h1>
-    <div class="companyName">
-        <label for="name">Company Name</label>
-        <input type="text" id="companyName" placeholder="Enter your name">
-    </div>
-    <div class="name">
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Enter your name">
-    </div>
-    <div class="email">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email">
-    </div>
-    <div class="number">
-        <label for="number">Phone number</label>
-        <input type="tel" id="number" placeholder="Enter your phone number">
-    </div>
-    <div class="password">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password">
-    </div>
-    <div class="confirm password">
-        <label for="confirm password">Confirm Password</label>
-        <input type="password" id="confirm password" placeholder="Confirm your password">
-    </div>
-    <div class="submit">
-        <button type="submit" @click="signup">Sign up</button>
-</div>
+
+    <h4 class="text-center mt-4">Ensure your email for registration</h4>
+    <form @submit.prevent="submit">
+      <input
+        v-model="values.companyName"
+        placeholder="Company Name"
+        type="text"
+        required="required"
+      />
+      <input v-model="values.firstName" placeholder="Name" type="text" required="required" />
+
+        
+        <input v-model="values.email" placeholder="E-mail" type="email" required="required" />
+
+      <input
+        v-model="values.phoneNumber"
+        placeholder="Phone Number"
+        type="tel"
+        required="required"
+      />
+      <input v-model="values.password" placeholder="Password" type="password" required="required" />
+
+      <button type="submit">Submit</button>
+    </form>
+    {{ values }}
   </div>
 </template>
 
 <script>
+import { sendGoogleSpreadsheetRequest } from "../lib/SendRequest.js";
+
 export default {
-  name: 'HelloWorld',
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+  data() {
+    return {
+      values: {
+        firstName: "",
+        companyName: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    submit() {
+      const { companyName, phoneNumber, firstName, email, password } =
+        this.values;
+
+      sendGoogleSpreadsheetRequest([
+        companyName,
+        firstName,
+        email,
+        phoneNumber,
+        password,
+      ]);
+
+      console.log(
+        "Company Name: " +
+          companyName +
+          " " +
+          "First Name: " +
+          firstName +
+          " " +
+          "Email: " +
+          email +
+          " " +
+          "Phone Number: " +
+          phoneNumber +
+          " " +
+          "Password: " +
+          password
+      );
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -45,15 +86,28 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
+}
+
+v-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 5px;
+  align-content: center;
+  align-items: center;
 }
 </style>
