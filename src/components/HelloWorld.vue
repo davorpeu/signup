@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Sign up</h1>
-
+    <router-link to="/bar">Go to Bar</router-link>
     <h4 class="text-center mt-4">Ensure your email for registration</h4>
     <form @submit.prevent="submit">
       <input
@@ -10,10 +10,19 @@
         type="text"
         required="required"
       />
-      <input v-model="values.firstName" placeholder="Name" type="text" required="required" />
+      <input
+        v-model="values.firstName"
+        placeholder="Name"
+        type="text"
+        required="required"
+      />
 
-        
-        <input v-model="values.email" placeholder="E-mail" type="email" required="required" />
+      <input
+        v-model="values.email"
+        placeholder="E-mail"
+        type="email"
+        required="required"
+      />
 
       <input
         v-model="values.phoneNumber"
@@ -21,21 +30,30 @@
         type="tel"
         required="required"
       />
-      <input v-model="values.password" placeholder="Password" type="password" required="required" />
+      <input
+        v-model="values.password"
+        placeholder="Password"
+        type="password"
+        required="required"
+      />
 
       <button type="submit">Submit</button>
     </form>
     {{ values }}
+  <router-view></router-view>
+
   </div>
 </template>
 
 <script>
 import { sendGoogleSpreadsheetRequest } from "../lib/SendRequest.js";
 
+
 export default {
   props: {
     msg: String,
   },
+  
   data() {
     return {
       values: {
@@ -59,23 +77,6 @@ export default {
         phoneNumber,
         password,
       ]);
-
-      console.log(
-        "Company Name: " +
-          companyName +
-          " " +
-          "First Name: " +
-          firstName +
-          " " +
-          "Email: " +
-          email +
-          " " +
-          "Phone Number: " +
-          phoneNumber +
-          " " +
-          "Password: " +
-          password
-      );
     },
   },
 };
