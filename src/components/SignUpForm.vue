@@ -1,59 +1,53 @@
 <template>
   <div>
-    <h1>Sign up</h1>
-    <router-link to="/bar">Go to Bar</router-link>
-    <h4 class="text-center mt-4">Ensure your email for registration</h4>
+    <h1 class="content is-large">Sign up</h1>
+    <h2 class="content is-large">Ensure your email for registration</h2>
     <form @submit.prevent="submit">
-      <input
+      <input class="input input-form"
         v-model="values.companyName"
         placeholder="Company Name"
         type="text"
         required="required"
       />
-      <input
+      <input class="input input-form"
         v-model="values.firstName"
         placeholder="Name"
         type="text"
         required="required"
       />
 
-      <input
+      <input class="input input-form"
         v-model="values.email"
         placeholder="E-mail"
         type="email"
         required="required"
       />
 
-      <input
+      <input class="input input-form"
         v-model="values.phoneNumber"
         placeholder="Phone Number"
         type="tel"
         required="required"
       />
-      <input
+      <input class="input input-form"
         v-model="values.password"
         placeholder="Password"
         type="password"
         required="required"
       />
 
-      <button type="submit">Submit</button>
+      <button class="button is-dark" type="submit">Submit</button>
     </form>
-    {{ values }}
-  <router-view></router-view>
 
   </div>
 </template>
 
 <script>
-import { sendGoogleSpreadsheetRequest } from "../lib/SendRequest.js";
-
-
 export default {
   props: {
     msg: String,
   },
-  
+
   data() {
     return {
       values: {
@@ -67,16 +61,7 @@ export default {
   },
   methods: {
     submit() {
-      const { companyName, phoneNumber, firstName, email, password } =
-        this.values;
-
-      sendGoogleSpreadsheetRequest([
-        companyName,
-        firstName,
-        email,
-        phoneNumber,
-        password,
-      ]);
+      this.$emit("sendValues", this.values);
     },
   },
 };
@@ -85,7 +70,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
 }
 
 ul {
@@ -101,14 +85,9 @@ li {
 a {
   color: #42b983;
 }
-
-v-form {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  gap: 5px;
-  align-content: center;
-  align-items: center;
+.input-form{
+  width: 90%;
+  margin-bottom: 16px;
 }
+
 </style>
