@@ -1,44 +1,49 @@
 <template>
   <div>
     <h1 class="content is-large">Sign up</h1>
-    <h2 class="content is-large">Ensure your email for registration</h2>
+    <h2 class="content is-large" style="    width: 90%;
+    text-align: center; margin: auto; margin-bottom: 16px;">Ensure your email for registration</h2>
     <form @submit.prevent="submit">
-      <input class="input input-form"
+      <input
+        class="input input-form"
         v-model="values.companyName"
         placeholder="Company Name"
         type="text"
         required="required"
       />
-      <input class="input input-form"
+      <input
+        class="input input-form"
         v-model="values.firstName"
         placeholder="Name"
         type="text"
         required="required"
       />
 
-      <input class="input input-form"
+      <input
+        class="input input-form"
         v-model="values.email"
         placeholder="E-mail"
         type="email"
         required="required"
       />
 
-      <input class="input input-form"
+      <input
+        class="input input-form"
         v-model="values.phoneNumber"
         placeholder="Phone Number"
         type="tel"
         required="required"
       />
-      <input class="input input-form"
+      <input
+        class="input input-form"
         v-model="values.password"
         placeholder="Password"
         type="password"
         required="required"
       />
 
-      <button class="button is-dark" type="submit">Submit</button>
+      <button class="button is-malibu" type="submit">Submit</button>
     </form>
-
   </div>
 </template>
 
@@ -69,6 +74,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.is-malibu {
+  color: #ffff;
+  background: #84a4fc;
+}
 h3 {
 }
 
@@ -85,9 +94,8 @@ li {
 a {
   color: #42b983;
 }
-.input-form{
+.input-form {
   width: 90%;
   margin-bottom: 16px;
 }
-
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <div class="home columns ">
+  <div class="home columns " style="
+  margin: auto;
+">
     <div class="column is-two-thirds media " alt="hero"></div>
     <SignUp class="column  auto" />
   </div>
@@ -21,6 +23,7 @@ export default {
   box-sizing: content-box;
 }
 .media {
+  filter: brightness(50%);
 
   background: url("../assets/hero-2.jpg") center / cover;
 }
